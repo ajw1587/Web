@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Simple Example</title>
+</head>
+<body>
+    <h1 id="pageTitle">Hello World!</h1>
+    <h1 id="pageTitle">Hello World!</h1>
+
+    <script>
+        // getElementById
+        const pageTitle = document.getElementById("pageTitle")
+        
+        // queurySelector
+        const pageTitle = document.querySelector('h1')
+
+        // 조작하기
+        pageTitle.textContent = "안녕 세상아!"
+    </script>
+</body>
+</html>
