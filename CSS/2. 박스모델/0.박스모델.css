@@ -1,0 +1,8 @@
+.box {
+  background-color: bisque;
+  width: 200px;
+  height: 200px;
+  padding: 50px;
+  border: 10px solid aqua;
+  margin: 10px;
+}

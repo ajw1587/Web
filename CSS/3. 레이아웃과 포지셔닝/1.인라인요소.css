@@ -1,0 +1,11 @@
+.box {
+  background-color: aqua;
+  width: 50%;
+  height: 200px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.inline {
+  background-color: bisque;
+}
