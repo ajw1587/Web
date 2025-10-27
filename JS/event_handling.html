@@ -10,12 +10,14 @@
         <h1>Event Handling</h1>
         <input type="text" id="text">
         <button id="click">Click Me</button>
+        <button id="clear">Clear</button>
     </div>
 
     <script>
         const container = document.getElementById('container')
         const text = document.getElementById('text')
         const clickButton = document.getElementById("click")
+        const clearButton = document.getElementById("clear")
 
         clickButton.addEventListener('click', function() {
             clickButton.textContent = 'I am clicked'
@@ -25,6 +27,15 @@
             const pTag = document.createElement('p')
             pTag.textContent = text.value
             container.appendChild(pTag)
+        })
+
+        clearButton.addEventListener('click', function() {
+            const pTags = document.querySelectorAll('div p')
+            console.log(pTags)
+
+            for (let i = 0; i < pTags.length; i++) {
+                pTage[i].remove()
+            }
         })
     </script>
 </body>
