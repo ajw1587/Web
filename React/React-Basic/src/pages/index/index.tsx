@@ -3,46 +3,51 @@ import CommonSearchBar from '@components/common/searchBar/CommonSearchBar'
 import CommonNav from '@components/common/navigation/CommonNav'
 import CommonFooter from '@/components/common/footer/CommonFooter'
 import Card from './components/Card'
+import DetailDialog from '@/components/common/dialog/DetailDialog.tsx'
+
 // CSS
 import styles from "./styles/index.module.scss"
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 // TYPE
 import type { CardDTO } from './types/card.ts'
+import { useRecoilValue } from 'recoil'
+import { imageData } from '@/recoil/selectors/imageSelector.ts'
 
 function index() {
-  // imgUrls의 초기값으로 빈 배열인 []로 선언
-  const [imgUrls, setImgUrls] = useState([])
+  // // imgUrls의 초기값으로 빈 배열인 []로 선언
+  // const [imgUrls, setImgUrls] = useState([])
 
-  const getData = async () => {
-    // 오픈 API 호출
-    const API_URL = 'https://api.unsplash.com/search/photos'
-    const API_KEY = 'NbAEhQjAJYjXeb18uIWli6Fj4WQCsg2TQ5xYJjDllqc'
-    const PER_PAGE = 30
+  // const getData = async () => {
+  //   // 오픈 API 호출
+  //   const searchValue = 'Korea'
+  //   const pageValue = 100
 
-    const searchValue = 'Korea'
-    const pageValue = 100
+  //   try {
+  //     const res = await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`)
 
-    try {
-      const res = await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`)
+  //     if (res.status == 200) {
+  //       setImgUrls(res.data.results)
+  //     }
 
-      if (res.status == 200) {
-        setImgUrls(res.data.results)
-      }
+  //     console.log(res)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-      console.log(res)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const cardList = imgUrls.map((card: CardDTO) => {
-    return <Card data={card} key={card.id} />
-  })
+  // const cardList = imgUrls.map((card: CardDTO) => {
+  //   return <Card data={card} />
+  // })
   
-  useEffect(() => {
-    getData()
-  }, [])
+  // useEffect(() => {
+  //   getData()
+  // }, [])
+  const imgSelector = useRecoilValue(imageData)
+
+  const CARD_LIST = imgSelector.data.results.map((card: CardDTO) => {
+    return <Card data={card} />
+  })
 
   return (
     <div className={styles.page}>
@@ -64,12 +69,13 @@ function index() {
         </div>
         <div className={styles.page__contents__imageBox}>
           {
-            cardList
+            CARD_LIST
           }
         </div>
       </div>
       {/* 공통부터 UI 부분 */}
       <CommonFooter />
+      <DetailDialog />
     </div>
   )
 }
