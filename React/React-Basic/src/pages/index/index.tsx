@@ -15,38 +15,11 @@ import { useRecoilValue } from 'recoil'
 import { imageData } from '@/recoil/selectors/imageSelector.ts'
 
 function index() {
-  // // imgUrls의 초기값으로 빈 배열인 []로 선언
-  // const [imgUrls, setImgUrls] = useState([])
-
-  // const getData = async () => {
-  //   // 오픈 API 호출
-  //   const searchValue = 'Korea'
-  //   const pageValue = 100
-
-  //   try {
-  //     const res = await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`)
-
-  //     if (res.status == 200) {
-  //       setImgUrls(res.data.results)
-  //     }
-
-  //     console.log(res)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // const cardList = imgUrls.map((card: CardDTO) => {
-  //   return <Card data={card} />
-  // })
-  
-  // useEffect(() => {
-  //   getData()
-  // }, [])
   const imgSelector = useRecoilValue(imageData)
+  const [open, setOpen] = useState<boolean>(false) // 이미지 상세 다이얼로그 발생(관리) State
 
   const CARD_LIST = imgSelector.data.results.map((card: CardDTO) => {
-    return <Card data={card} />
+    return <Card data={card} handleDialog={setOpen}/>
   })
 
   return (
@@ -75,7 +48,7 @@ function index() {
       </div>
       {/* 공통부터 UI 부분 */}
       <CommonFooter />
-      <DetailDialog />
+      {open && <DetailDialog handleDialog={setOpen}/>}
     </div>
   )
 }
